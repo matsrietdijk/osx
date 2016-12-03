@@ -1,0 +1,89 @@
+---
+- name: OSX setup
+  hosts: local
+  connection: local
+
+  tasks:
+  - name: Create Homebrew folders
+    become: yes
+    file:
+      path: /usr/local/{{ item }}
+      owner: "{{ ansible_user }}"
+      group: admin
+      state: directory
+      mode: g+rwx
+    with_items:
+    - Cellar
+    - Frameworks
+    - etc
+    - include
+    - lib
+    - opt
+    - sbin
+    - share
+
+  - name: Create Homebrew zsh folders
+    become: yes
+    file:
+      path: /usr/local/share/{{ item }}
+      owner: "{{ ansible_user }}"
+      group: admin
+      state: directory
+      mode: 755
+    with_items:
+    - zsh
+    - zsh/site-functions
+
+  - name: Create Homebrew user folders
+    become: yes
+    file:
+      path: /Users/{{ ansible_user}}/Library/Caches/Homebrew
+      owner: "{{ ansible_user }}"
+      state: directory
+      mode: g+rwx
+
+  - name: Clone Homebrew
+    become: yes
+    git:
+      repo: https://github.com/Homebrew/brew
+      dest: /usr/local/Homebrew
+
+  - name: Set Homebrew repo owner
+    become: yes
+    file:
+      path: /usr/local/Homebrew
+      recurse: yes
+      owner: "{{ ansible_user }}"
+      group: admin
+
+  - name: Link brew command
+    file:
+      src: /usr/local/Homebrew/bin/brew
+      dest: /usr/local/bin/brew
+      state: link
+
+  - name: Update homebrew
+    homebrew: update_homebrew=yes
+
+  - name: Install packages
+    homebrew: name={{ item }} state=present
+    with_items:
+    - fish
+    - dockutil
+
+  - name: Install applications
+    homebrew_cask: name={{ item }} state=present
+    with_items:
+    - iterm2
+    - slack
+
+  - name: Add fish to standard shells
+    become: yes
+    lineinfile:
+      dest: /etc/shells
+      line: /usr/local/bin/fish
+  - name: Set fish as user shell
+    become: yes
+    user:
+      name: "{{ ansible_user }}"
+      shell: /usr/local/bin/fish
