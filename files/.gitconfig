@@ -1,0 +1,36 @@
+[include]
+    path = ~/.gitconfig_private
+[credential]
+    helper = osxkeychain
+[push]
+    default = simple
+[alias]
+    ap = add -p
+    br = branch
+    ci = commit
+    cl = clone
+    co = checkout
+    cm = checkout master
+    cb = checkout -b
+    cp = cherry-pick
+    dc = diff --cached
+    di = diff
+    ds = diff --staged
+    fe = fetch
+    hash = rev-parse --verify
+    hs = hash --short
+    lg = log --graph --pretty=format:'%C(auto)%h %d %s%C(reset) %C(cyan)[%an]%C(reset)'
+    mr = merge
+    o = browse
+    pl = pull
+    ps = push
+    pf = push --force-with-lease
+    pso = !git push -u origin `git rev-parse --abbrev-ref HEAD`
+    rb = rebase
+    rbc = rebase --continue
+    sh = show
+    st = status -s
+[pull]
+    rebase = true
+[rerere]
+    enabled = true

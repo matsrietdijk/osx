@@ -2,6 +2,13 @@
 - name: OSX setup
   hosts: local
   connection: local
+  vars_prompt:
+  - name: git_name
+    prompt: What is your global git config user.name? 
+    private: no
+  - name: git_email
+    prompt: What is your global git config user.email? 
+    private: no
 
   tasks:
   - name: Create Homebrew folders
@@ -62,28 +69,128 @@
       dest: /usr/local/bin/brew
       state: link
 
-  - name: Update homebrew
+  - name: Update Homebrew
     homebrew: update_homebrew=yes
+
+  - name: Enable Homebrew taps
+    homebrew_tap:
+      name: "{{ item }}"
+    with_items:
+    - d12frosted/emacs-plus
+    - caskroom/fonts
 
   - name: Install packages
     homebrew: name={{ item }} state=present
     with_items:
     - fish
     - dockutil
+    - node
+    - emacs-plus
+    - hub
+    - git
 
   - name: Install applications
     homebrew_cask: name={{ item }} state=present
     with_items:
     - iterm2
     - slack
+    - keepingyouawake
+    - spectacle
+    - font-source-code-pro-for-powerline
+
+  - name: Link homebrew apps
+    command: brew linkapps
 
   - name: Add fish to standard shells
     become: yes
     lineinfile:
       dest: /etc/shells
       line: /usr/local/bin/fish
+
   - name: Set fish as user shell
     become: yes
     user:
       name: "{{ ansible_user }}"
       shell: /usr/local/bin/fish
+
+  - name: Create private git config
+    lineinfile:
+      dest: /Users/{{ ansible_user }}/.gitconfig_private
+      create: yes
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+      insertafter: "{{ item.after }}"
+    with_items:
+    - line: "[user]"
+      regexp: ^\[user\]
+      after:
+    - line: "email = {{ git_email }}"
+      regexp: ^email ?=
+      after: ^\[user\]
+    - line: "name = {{ git_name }}"
+      regexp: ^name ?=
+      after: ^\[user\]
+
+  - name: Create dot folders
+    file:
+      path: "/Users/{{ ansible_user }}/{{ item }}"
+      state: directory
+    with_items:
+    - .vim
+    - .vim/colors
+    - .config
+    - .config/fish
+    - .config/fish/functions
+
+  - name: Link dot files
+    file:
+      src: "{{ playbook_dir }}/files/{{ item }}"
+      dest: "/Users/{{ ansible_user }}/{{ item }}"
+      state: link
+    with_items:
+    - .spacemacs
+    - .vimrc
+    - .vim/colors/monokai.vim
+    - .config/fish/config.fish
+    - .config/fish/vars.fish
+    - .config/fish/functions/fish_greeting.fish
+    - .config/fish/functions/fish_prompt_powerline.fish
+    - .config/fish/functions/fish_prompt_simple.fish
+    - .config/fish/functions/fish_right_prompt_powerline.fish
+    - .config/fish/functions/fish_right_prompt_simple.fish
+    - .config/fish/functions/jenv.fish
+    - .gitignore
+    - .gitconfig
+
+  - name: Clone Spacemacs
+    git:
+      repo: https://github.com/syl20bnr/spacemacs
+      dest: /Users/{{ ansible_user }}/.emacs.d
+
+  - name: Install global Node packages
+    npm:
+      name: "{{ item }}"
+      global: yes
+    with_items:
+    - gulp
+  - name: Check Dock items
+    command: "dockutil --find {{ item }}"
+    register: dock_items_to_remove
+    ignore_errors: yes 
+    with_items:
+    - Siri
+    - Mail
+    - Launchpad
+    - Contacts
+    - Reminders
+    - Maps
+    - Photos
+    - Messages
+    - FaceTime
+    - iTunes
+    - iBooks
+
+  - name: Remove items from Dock
+    command: "dockutil --remove {{ item.item }}"
+    when: item|succeeded
+    with_items: "{{ dock_items_to_remove.results }}"
