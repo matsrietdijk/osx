@@ -2,6 +2,8 @@
 - name: OSX setup
   hosts: local
   connection: local
+  vars:
+  - user_home: "/Users/{{ ansible_user }}"
   vars_prompt:
   - name: git_name
     prompt: What is your global git config user.name? 
@@ -14,7 +16,7 @@
   - name: Create Homebrew folders
     become: yes
     file:
-      path: /usr/local/{{ item }}
+      path: "/usr/local/{{ item }}"
       owner: "{{ ansible_user }}"
       group: admin
       state: directory
@@ -32,7 +34,7 @@
   - name: Create Homebrew zsh folders
     become: yes
     file:
-      path: /usr/local/share/{{ item }}
+      path: "/usr/local/share/{{ item }}"
       owner: "{{ ansible_user }}"
       group: admin
       state: directory
@@ -44,7 +46,7 @@
   - name: Create Homebrew user folders
     become: yes
     file:
-      path: /Users/{{ ansible_user}}/Library/Caches/Homebrew
+      path: "{{ user_home }}/Library/Caches/Homebrew"
       owner: "{{ ansible_user }}"
       state: directory
       mode: g+rwx
@@ -70,7 +72,8 @@
       state: link
 
   - name: Update Homebrew
-    homebrew: update_homebrew=yes
+    homebrew:
+      update_homebrew: yes
 
   - name: Enable Homebrew taps
     homebrew_tap:
@@ -80,7 +83,9 @@
     - caskroom/fonts
 
   - name: Install packages
-    homebrew: name={{ item }} state=present
+    homebrew:
+      name: "{{ item }}"
+      state: present
     with_items:
     - fish
     - dockutil
@@ -90,7 +95,9 @@
     - git
 
   - name: Install applications
-    homebrew_cask: name={{ item }} state=present
+    homebrew_cask:
+      name: "{{ item }}"
+      state: present
     with_items:
     - iterm2
     - slack
@@ -115,7 +122,7 @@
 
   - name: Create private git config
     lineinfile:
-      dest: /Users/{{ ansible_user }}/.gitconfig_private
+      dest: "{{ user_home }}/.gitconfig_private"
       create: yes
       regexp: "{{ item.regexp }}"
       line: "{{ item.line }}"
@@ -133,7 +140,7 @@
 
   - name: Create dot folders
     file:
-      path: "/Users/{{ ansible_user }}/{{ item }}"
+      path: "{{ user_home }}/{{ item }}"
       state: directory
     with_items:
     - .vim
@@ -145,7 +152,7 @@
   - name: Link dot files
     file:
       src: "{{ playbook_dir }}/files/{{ item }}"
-      dest: "/Users/{{ ansible_user }}/{{ item }}"
+      dest: "{{ user_home }}/{{ item }}"
       state: link
     with_items:
     - .spacemacs
@@ -165,7 +172,7 @@
   - name: Clone Spacemacs
     git:
       repo: https://github.com/syl20bnr/spacemacs
-      dest: /Users/{{ ansible_user }}/.emacs.d
+      dest: "{{ user_home }}/.emacs.d"
 
   - name: Install global Node packages
     npm:
@@ -173,6 +180,7 @@
       global: yes
     with_items:
     - gulp
+
   - name: Check Dock items
     command: "dockutil --find {{ item }}"
     register: dock_items_to_remove
