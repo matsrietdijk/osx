@@ -192,6 +192,7 @@
     - gulp
     - ionic
     - cordova
+    - tern
 
   - name: Check Dock items
     command: "dockutil --find {{ item }}"
