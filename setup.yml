@@ -5,14 +5,15 @@
   vars:
   - user_home: "/Users/{{ ansible_user }}"
   vars_prompt:
-  - name: git_name
-    prompt: What is your global git config user.name? 
+  - prompt: What is your Git username?
+    name: git_name
     private: no
-  - name: git_email
-    prompt: What is your global git config user.email? 
+  - prompt: What is your Git e-mail address?
+    name: git_email
     private: no
 
   tasks:
+
   - name: Create Homebrew folders
     become: yes
     file:
@@ -81,6 +82,9 @@
     with_items:
     - d12frosted/emacs-plus
     - caskroom/fonts
+    - homebrew/dupes
+    - homebrew/versions
+    - homebrew/homebrew-php
 
   - name: Install packages
     homebrew:
@@ -93,6 +97,9 @@
     - emacs-plus
     - hub
     - git
+    - php71
+    - mariadb
+    - postgresql
 
   - name: Install applications
     homebrew_cask:
@@ -103,6 +110,9 @@
     - slack
     - keepingyouawake
     - spectacle
+    - postico
+    - sequel-pro
+    - spotify
     - font-source-code-pro-for-powerline
 
   - name: Link homebrew apps
@@ -180,6 +190,8 @@
       global: yes
     with_items:
     - gulp
+    - ionic
+    - cordova
 
   - name: Check Dock items
     command: "dockutil --find {{ item }}"
