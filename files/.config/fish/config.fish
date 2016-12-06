@@ -65,6 +65,6 @@ test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
 #   rbenv init - | source
 # end
 # 
-# if test -d ~/.jenv/shims
-#   jenv global > /dev/null
-# end
+if test -d ~/.jenv/shims
+  jenv global > /dev/null
+end

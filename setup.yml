@@ -104,6 +104,7 @@
     - postgresql
     - tree
     - ag
+    - jenv
 
   - name: Install applications
     homebrew_cask:
@@ -118,6 +119,7 @@
     - sequel-pro
     - spotify
     - font-source-code-pro-for-powerline
+    - java
 
   - name: Link homebrew apps
     command: brew linkapps
@@ -162,6 +164,8 @@
     - .config
     - .config/fish
     - .config/fish/functions
+    - .jenv
+    - .jenv/versions
 
   - name: Link dot files
     file:
@@ -180,6 +184,7 @@
     - .config/fish/functions/fish_right_prompt_powerline.fish
     - .config/fish/functions/fish_right_prompt_simple.fish
     - .config/fish/functions/jenv.fish
+    - .config/fish/functions/export.fish
     - .gitignore
     - .gitconfig
 
