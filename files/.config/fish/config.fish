@@ -55,7 +55,7 @@ test -d /usr/local/sbin ; and set -x PATH /usr/local/sbin $PATH
 test -d {$HOME}/.local/bin ; and set -x PATH {$HOME}/.local/bin $PATH
 test -d {$HOME}/.jenv/bin ; and set -x PATH {$HOME}/.jenv/bin $PATH
 test -d {$HOME}/.composer/vendor/bin ; and set -x PATH {$HOME}/.composer/vendor/bin $PATH
-
+test -d /usr/local/opt/android-sdk ; and set -x ANDROID_HOME /usr/local/opt/android-sdk
 test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
 
 # test -d (brew --prefix homebrew/php/php56)/bin ; and set -x PATH (brew --prefix homebrew/php/php56)/bin $PATH
@@ -64,7 +64,7 @@ test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
 # if type rbenv > /dev/null
 #   rbenv init - | source
 # end
-# 
+
 if test -d ~/.jenv/shims
   jenv global > /dev/null
 end
