@@ -206,6 +206,7 @@
     - ionic
     - cordova
     - tern
+    - bower
 
   - name: Check Dock items
     command: "dockutil --find {{ item }}"
