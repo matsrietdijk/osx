@@ -327,9 +327,10 @@ you should place your code here."
   ;; Set relative line number format
   (setq linum-relative-format "%3s")
   (setq linum-relative-current-symbol "0")
-  ;; Change linum background color
-  (set-face-attribute 'linum nil :background "#3C3D37")
-  (set-face-attribute 'fringe nil :background "#3C3D37")
+  ;; Change linum colors color
+  (set-face-attribute 'linum-relative-current-face nil :foreground monokai-yellow)
+  (set-face-attribute 'linum nil :background monokai-highlight-line)
+  (set-face-attribute 'fringe nil :background monokai-highlight-line)
   ;; Set tab widths
   (setq-default
    elm-indent-offset 4
