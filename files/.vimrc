@@ -9,7 +9,7 @@ endif
 " Use bash for external commands
 set shell=/bin/bash
 " Enable line numbers
-set number
+set relativenumber
 " Use 2 spaces for tabs
 set expandtab
 set tabstop=2

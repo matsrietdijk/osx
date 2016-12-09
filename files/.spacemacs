@@ -149,7 +149,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro for Powerline"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -320,22 +320,30 @@ you should place your code here."
   ;; Set line number format
   (defun linum-format-func (line)
     (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
-      (propertize (format (format "%%%dd " w) line) 'face 'linum)))
+      (propertize (format (format "%%%dd" w) line) 'face 'linum)))
   (setq linum-format 'linum-format-func)
+  ;; Turn on relative line numbers
+  (linum-relative-on)
+  ;; Set relative line number format
+  (setq linum-relative-format "%3s")
+  (setq linum-relative-current-symbol "0")
+  ;; Change linum background color
+  (set-face-attribute 'linum nil :background "#3C3D37")
+  (set-face-attribute 'fringe nil :background "#3C3D37")
   ;; Set tab widths
   (setq-default
-   elm-indent-offset 2
-   tab-width 2
-   sh-basic-offset 2
-   sh-indentation 2
+   elm-indent-offset 4
+   tab-width 4
+   sh-basic-offset 4
+   sh-indentation 4
    web-mode-markup-indent-offset 4
-   web-mode-css-indent-offset 2
-   web-mode-code-indent-offset 2
-   web-mode-indent-style 2
-   c-basic-offset 2
+   web-mode-css-indent-offset 4
+   web-mode-code-indent-offset 4
+   web-mode-indent-style 4
+   c-basic-offset 4
    js2-basic-offset 4
    js-indent-level 4
-   css-indent-offset 2
+   css-indent-offset 4
    haskell-indent-spaces 4
    haskell-indentation-ifte-offset 4
    haskell-indentation-layout-offset 4
