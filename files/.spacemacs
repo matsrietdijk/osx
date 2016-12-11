@@ -321,7 +321,7 @@ you should place your code here."
   (defun linum-format-func (line)
     (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
       (propertize (format (format "%%%dd" w) line) 'face 'linum)))
-  (setq linum-format 'linum-format-func)
+  (setq linum-format "%3s")
   ;; Turn on relative line numbers
   (linum-relative-on)
   ;; Set relative line number format
