@@ -103,6 +103,7 @@
     - composer
     - mariadb
     - postgresql
+    - nginx
     - tree
     - ag
     - jenv
