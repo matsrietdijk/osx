@@ -209,6 +209,7 @@
     - cordova
     - tern
     - bower
+    - grunt
 
   - name: Check Dock items
     command: "dockutil --find {{ item }}"
