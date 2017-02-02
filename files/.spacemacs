@@ -331,6 +331,9 @@ you should place your code here."
   (set-face-attribute 'linum-relative-current-face nil :foreground monokai-yellow)
   (set-face-attribute 'linum nil :background monokai-highlight-line)
   (set-face-attribute 'fringe nil :background monokai-highlight-line)
+  ;; Change web mode paddings
+  (setq web-mode-script-padding 0)
+  (setq web-mode-style-padding 0)
   ;; Set tab widths
   (setq-default
    elm-indent-offset 4
@@ -363,6 +366,8 @@ you should place your code here."
   (setq shell-file-name "/bin/bash")
   ;; Enable web-mode when opening blade files
   (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+  ;; Enable web-mode when opening vue files
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
