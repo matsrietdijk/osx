@@ -58,6 +58,8 @@ test -d {$HOME}/.composer/vendor/bin ; and set -x PATH {$HOME}/.composer/vendor/
 test -d /usr/local/opt/android-sdk ; and set -x ANDROID_HOME /usr/local/opt/android-sdk
 test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
 
+command -s yarn >/dev/null; and set -x PATH $PATH (yarn global bin)
+
 # test -d (brew --prefix homebrew/php/php56)/bin ; and set -x PATH (brew --prefix homebrew/php/php56)/bin $PATH
 # test -d (brew --prefix homebrew/php/php70)/bin ; and set -x PATH (brew --prefix homebrew/php/php70)/bin $PATH
 # 
