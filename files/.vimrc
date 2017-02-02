@@ -10,10 +10,10 @@ endif
 set shell=/bin/bash
 " Enable line numbers
 set relativenumber
-" Use 2 spaces for tabs
+" Use 4 spaces for tabs
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 " Enable wildmenu
 set wildmode=longest,list
 set wildmenu
