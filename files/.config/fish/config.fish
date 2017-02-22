@@ -27,9 +27,10 @@ function .4;      cd ../../../..; end
 function .5;      cd ../../../../..; end
 function .6;      cd ../../../../../..; end
 
-if type hub > /dev/null
+if command -s hub >/dev/null
   function git; hub $argv; end
 end
+
 function g --wraps git; git $argv; end
 
 function psg; ps aux | grep -i $argv; end
