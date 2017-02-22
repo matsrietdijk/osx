@@ -184,6 +184,7 @@
     - .vimrc
     - .vim/colors/monokai.vim
     - .config/fish/config.fish
+    - .config/fish/gnupg.fish
     - .config/fish/vars.fish
     - .config/fish/functions/fish_greeting.fish
     - .config/fish/functions/fish_prompt_powerline.fish

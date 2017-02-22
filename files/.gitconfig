@@ -34,3 +34,5 @@
     rebase = true
 [rerere]
     enabled = true
+[gpg]
+	program = gpg2
