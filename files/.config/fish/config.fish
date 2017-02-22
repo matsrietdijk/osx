@@ -65,7 +65,7 @@ end
 command -s yarn >/dev/null; and set -x PATH $PATH (yarn global bin)
 
 if command -s rbenv >/dev/null
-  rbenv init - | source
+  status --is-interactive; and source (rbenv init -|psub)
 end
 
 if test -d ~/.jenv/shims
