@@ -35,4 +35,10 @@
 [rerere]
     enabled = true
 [gpg]
-	program = gpg2
+    program = gpg2
+[status]
+    showUntrackedFiles = all
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
