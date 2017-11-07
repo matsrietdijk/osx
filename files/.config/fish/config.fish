@@ -15,17 +15,17 @@ function trello;  safari https://trello.com $argv; end
 function e;       emacs $argv &; end
 function para;    trello; spotify; slack; emacs &; end
 
-function -;       cd -; end
-function ...;     cd ../..; end
-function ....;    cd ../../..; end
-function .....;   cd ../../../..; end
-function ......;  cd ../../../../..; end
-function .......; cd ../../../../../..; end
-function .2;      cd ../..; end
-function .3;      cd ../../..; end
-function .4;      cd ../../../..; end
-function .5;      cd ../../../../..; end
-function .6;      cd ../../../../../..; end
+abbr -a -- -       'cd -'
+abbr -a -- ...     '../..'
+abbr -a -- ....    '../../..'
+abbr -a -- .....   '../../../..'
+abbr -a -- ......  '../../../../..'
+abbr -a -- ....... '../../../../../..'
+abbr -a -- .2      '../..'
+abbr -a -- .3      '../../..'
+abbr -a -- .4      '../../../..'
+abbr -a -- .5      '../../../../..'
+abbr -a -- .6      '../../../../../..'
 
 if command -s hub >/dev/null
   function git; hub $argv; end
@@ -52,16 +52,15 @@ set -x EDITOR vim
 set -x LANGUAGE en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 set -g default_user mats
+set -x GPG_TTY (tty)
 test -d /usr/local/sbin ; and set -x PATH /usr/local/sbin $PATH
 test -d {$HOME}/.local/bin ; and set -x PATH {$HOME}/.local/bin $PATH
 test -d {$HOME}/.jenv/bin ; and set -x PATH {$HOME}/.jenv/bin $PATH
 test -d {$HOME}/.composer/vendor/bin ; and set -x PATH {$HOME}/.composer/vendor/bin $PATH
-test -d /usr/local/opt/android-sdk ; and set -x ANDROID_HOME /usr/local/opt/android-sdk
 test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
-
-if command -s gpg >/dev/null
-  source ~/.config/fish/gnupg.fish
-end
+test -d {$HOME}/Library/Android/sdk ; and set -x ANDROID_HOME {$HOME}/Library/Android/sdk
+test -d {$ANDROID_HOME}/tools ; and set -x PATH {$ANDROID_HOME}/tools $PATH
+test -d {$ANDROID_HOME}/platform-tools ; and set -x PATH {$ANDROID_HOME}/platform-tools $PATH
 
 command -s yarn >/dev/null; and set -x PATH $PATH (yarn global bin)
 
