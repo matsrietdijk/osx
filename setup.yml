@@ -95,7 +95,7 @@
     with_items:
     - fish
     - dockutil
-    # - node
+    - node
     - yarn
     - emacs-plus
     - hub
