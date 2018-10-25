@@ -75,6 +75,8 @@ if executable('ag')
     " let g:ctrlp_use_caching=0
     let g:ackprg='ag --vimgrep'
 endif
+" ALE
+let g:ale_linters = {'elixir': []}
 " CtrlP
 let g:ctrlp_map=''
 " NERDTree
