@@ -14,6 +14,8 @@ if has("mouse_sgr")
 else
   set ttymouse=xterm2
 end
+" Speed up Vim by not loading fish
+set shell=/bin/bash\ -i
 " Enable y/p with system clipboard
 set clipboard^=unnamed,unnamedplus
 " Enable line numbers
