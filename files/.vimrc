@@ -96,6 +96,8 @@ let g:rooter_use_lcd=1
 let g:rooter_change_directory_for_non_project_files='current'
 " Fugitive
 let g:fugitive_no_maps=1
+" Airline
+let g:airline_section_c='%{fnamemodify(getcwd(), ":t")} ~ %t'
 " Leader mappings
 nmap <Leader>/ :Ack!<Space>
 nnoremap <Leader><Tab> :b#<Cr>
