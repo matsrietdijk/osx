@@ -20,6 +20,8 @@ set shell=/bin/bash\ -i
 set clipboard^=unnamed,unnamedplus
 " Enable line numbers
 set relativenumber
+" Disable line wrapping
+set nowrap
 " Use 4 spaces for tabs
 set expandtab
 set tabstop=4
