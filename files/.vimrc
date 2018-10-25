@@ -8,6 +8,12 @@ syntax on
 if has('nmouse')
   set mouse=a
 endif
+" Allow better mouse support (even after col 223)
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 " Enable y/p with system clipboard
 set clipboard^=unnamed,unnamedplus
 " Enable line numbers
