@@ -90,6 +90,10 @@ let g:airline_theme='minimalist'
 let g:airline_powerline_fonts=1
 " GitGutter
 let g:gitgutter_map_keys=0
+" Rooter
+let g:rooter_silent_chdir=1
+let g:rooter_use_lcd=1
+let g:rooter_change_directory_for_non_project_files='current'
 " Fugitive
 let g:fugitive_no_maps=1
 " Leader mappings
