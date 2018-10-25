@@ -24,9 +24,9 @@ set relativenumber
 set nowrap
 " Use 4 spaces for tabs
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 " Swap splits default
 set splitright
 set splitbelow
