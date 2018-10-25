@@ -99,6 +99,8 @@ let g:fugitive_no_maps=1
 " Airline
 let g:airline_section_c='%{fnamemodify(getcwd(), ":t")} ~ %t'
 " Leader mappings
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 nmap <Leader>/ :Ack!<Space>
 nnoremap <Leader><Tab> :b#<Cr>
 
