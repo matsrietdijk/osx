@@ -8,15 +8,25 @@ syntax on
 if has('nmouse')
   set mouse=a
 endif
+" Allow better mouse support (even after col 223)
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
+" Speed up Vim by not loading fish
+set shell=/bin/bash\ -i
 " Enable y/p with system clipboard
 set clipboard^=unnamed,unnamedplus
 " Enable line numbers
 set relativenumber
+" Disable line wrapping
+set nowrap
 " Use 4 spaces for tabs
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 " Swap splits default
 set splitright
 set splitbelow
@@ -65,6 +75,8 @@ if executable('ag')
     " let g:ctrlp_use_caching=0
     let g:ackprg='ag --vimgrep'
 endif
+" ALE
+let g:ale_linters = {'elixir': []}
 " CtrlP
 let g:ctrlp_map=''
 " NERDTree
@@ -78,9 +90,17 @@ let g:airline_theme='minimalist'
 let g:airline_powerline_fonts=1
 " GitGutter
 let g:gitgutter_map_keys=0
+" Rooter
+let g:rooter_silent_chdir=1
+let g:rooter_use_lcd=1
+let g:rooter_change_directory_for_non_project_files='current'
 " Fugitive
 let g:fugitive_no_maps=1
+" Airline
+let g:airline_section_c='%{fnamemodify(getcwd(), ":t")} ~ %t'
 " Leader mappings
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 nmap <Leader>/ :Ack!<Space>
 nnoremap <Leader><Tab> :b#<Cr>
 
@@ -115,3 +135,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+cmap <C-u> <Up>
+cmap <C-d> <Down>
