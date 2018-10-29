@@ -62,6 +62,7 @@ test -d /Library/TeX/texbin ; and set -x PATH /Library/TeX/texbin $PATH
 test -d {$HOME}/Library/Android/sdk ; and set -x ANDROID_HOME {$HOME}/Library/Android/sdk
 test -d {$ANDROID_HOME}/tools ; and set -x PATH {$ANDROID_HOME}/tools $PATH
 test -d {$ANDROID_HOME}/platform-tools ; and set -x PATH {$ANDROID_HOME}/platform-tools $PATH
+test -d /usr/local/opt/openssl/lib/pkgconfig; and set -x PKG_CONFIG_PATH /usr/local/opt/openssl/lib/pkgconfig
 
 command -s yarn >/dev/null; and set -x PATH $PATH (yarn global bin)
 
