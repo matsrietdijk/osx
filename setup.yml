@@ -181,6 +181,7 @@
       state: link
     with_items:
     - .spacemacs
+    - .tmux.conf
     - .vimrc
     - .vim/colors/monokai.vim
     - .config/fish/config.fish
