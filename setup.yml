@@ -82,7 +82,6 @@
     homebrew_tap:
       name: "{{ item }}"
     with_items:
-    - d12frosted/emacs-plus
     - caskroom/fonts
     - homebrew/dupes
     - homebrew/versions
@@ -97,7 +96,6 @@
     - dockutil
     - node
     - yarn
-    - emacs-plus
     - hub
     - git
     - php71
@@ -180,7 +178,6 @@
       dest: "{{ user_home }}/{{ item }}"
       state: link
     with_items:
-    - .spacemacs
     - .tmux.conf
     - .vimrc
     - .vim/colors/monokai.vim
@@ -196,11 +193,6 @@
     - .config/fish/functions/export.fish
     - .gitignore
     - .gitconfig
-
-  - name: Clone Spacemacs
-    git:
-      repo: https://github.com/syl20bnr/spacemacs
-      dest: "{{ user_home }}/.emacs.d"
 
   - name: Install global Node packages
     npm:
