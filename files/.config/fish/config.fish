@@ -1,4 +1,5 @@
 source ~/.config/fish/vars.fish
+source ~/.config/fish/brew_keg_only_links.fish
 
 if set -q __mats_prompt_simple
   function fish_prompt;       fish_prompt_simple; end
