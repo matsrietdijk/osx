@@ -182,7 +182,7 @@
     - .vimrc
     - .vim/colors/monokai.vim
     - .config/fish/config.fish
-    - .config/fish/gnupg.fish
+    - .config/fish/brew_keg_only_links.fish
     - .config/fish/vars.fish
     - .config/fish/functions/fish_greeting.fish
     - .config/fish/functions/fish_prompt_powerline.fish
@@ -190,7 +190,6 @@
     - .config/fish/functions/fish_right_prompt_powerline.fish
     - .config/fish/functions/fish_right_prompt_simple.fish
     - .config/fish/functions/jenv.fish
-    - .config/fish/functions/export.fish
     - .gitignore
     - .gitconfig
 
