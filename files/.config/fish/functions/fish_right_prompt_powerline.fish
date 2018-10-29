@@ -4,11 +4,25 @@
 # Helper functions
 function __mats_git_branch -d 'Get the current git branch (or commitish)'
   set -l ref (command git symbolic-ref HEAD ^/dev/null)
-  if [ $status -gt 0 ]
-  set -l branch (command git show-ref --head -s --abbrev | head -n1 ^/dev/null)
-  set ref "$__mats_detached_glyph $branch"
+  set -l ref_status $status
+  if [ $ref_status -gt 0 ]
+    set -l branch (command git show-ref --head -s --abbrev | head -n1 ^/dev/null)
+    set ref "$__mats_detached_glyph $branch"
   end
+
   echo $ref | sed  "s#refs/heads/#$__mats_branch_glyph #"
+  set -l upstream (command git rev-parse --abbrev-ref --symbolic-full-name '@{u}' ^/dev/null)
+  if [ $status -eq 0 -a $ref_status -eq 0 ]
+    set -l ahead  (command git rev-list "@{u}..HEAD" --count)
+    set -l behind (command git rev-list "HEAD..@{u}" --count)
+    if [ (math "$ahead+$behind") -ne 0 ]
+      echo -n '{'
+      [ $ahead -ne 0 ]; and echo -n "+$ahead"
+      [ $ahead -ne 0 -a $behind != 0 ]; and echo -n "/"
+      [ $behind -ne 0 ]; and echo -n "-$behind"
+      echo -n '}'
+    end
+  end
 end
 
 # Segment handling
